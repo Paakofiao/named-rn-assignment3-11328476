@@ -8,6 +8,7 @@ export default function App() {
       <Text style={styles.text1} >14 tasks today</Text>
       <TextInput style={styles.text2} placeholder={"Search"}/>
       <Image source={require('./images/person.png')} style={styles.Profile}/>
+      <Image source={require('./images/bx_slider.png')} style={styles.Profile1}/>
       <StatusBar style="auto" />
     </View>
   );
@@ -50,5 +51,11 @@ const styles = StyleSheet.create({
 top: -350,
 right: -145,
 backgroundColor: 'white'
+  },
+  Profile1:{
+    backgroundColor: 'red',
+    right: -145,
+    top: -285,
+    
   }
 });
