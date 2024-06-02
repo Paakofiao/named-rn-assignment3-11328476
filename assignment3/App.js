@@ -1,19 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Image, ScrollView, FlatList } from 'react-native';
+ 
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
+    <View style={{paddingBottom: 20}}>
       <Text style={styles.text} >Hello, Devs</Text>
       <Text style={styles.text1} >14 tasks today</Text>
       <Text style={styles.text3} >Categories</Text>
       <TextInput style={styles.text2} placeholder={"Search"}/>
       <Image source={require('./images/person.png')} style={styles.Profile}/>
       <Image source={require('./images/bx_slider.png')} style={styles.Profile1}/>
+      <View style={styles.category}>
       <ScrollView 
-      horizontal
+      horizontal={true} showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.scrollViewContainer}
-      >
+      >  
       <Image source={require('./images/Group 9.png')} style={styles.groupPic} />
       <Image source={require('./images/travel2.png')} style={styles.groupPic} />
       <Image source={require('./images/cook1.png')} style={styles.groupPic} />
@@ -23,15 +26,34 @@ export default function App() {
       <Image source={require('./images/church1.png')} style={styles.groupPic} />
       
       </ScrollView>
-      <Text style={styles.text7}>Ongoing Task</Text>
+      </View>
+       <Text style={styles.text7}>Ongoing Tasks</Text>
+       <FlatList style={{marginTop: 10}}
+        data={[
+          {key: '1', text: 'Mobile Development'}, {key: '2', text: 'Web Development'},
+          {key: '3', text: 'Push Ups'}, {key: '4', text: 'Sit Ups'},
+          {key: '5', text: 'Have Quiet Time '}, {key: '6', text: 'Charity'},
+          {key: '7', text: 'Have Lunch'}, {key: '8', text: 'Lunges'},
+          {key: '9', text: 'Lift Weights'}, {key: '10', text: 'Visit Kumasi'},
+          {key: '11', text: 'Data Structures'}, {key: '12', text: 'Wash Car'},
+          {key: '13', text: 'Feed Dog'}, {key: '14', text: 'Finish Assignment'},
+          {key: '15', text: 'Visit Grandma'},
+        ]}
+        renderItem={({item}) => (
+          <View style={styles.ongoingTasks}>
+            <Text style={styles.taskList}>{item.text}</Text>
+          </View>
+        )}
+       />
+        </View>
       <StatusBar style="auto" />
-    </View>
+      </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'beige',
     alignItems: 'center',
     justifyContent: 'center',
@@ -42,15 +64,15 @@ const styles = StyleSheet.create({
     left:15,
     fontWeight: 'bold',
     bottom: 700,
-    position: 'absolute'
-
+    position: 'absolute',
+    top: 50
   },
   text1:{
     bottom:670,
     left:15,
     fontSize: 13,
-    position: 'absolute'
-
+    position: 'absolute',
+    top: 85,
   },
   text2:{
     position: 'absolute',
@@ -75,7 +97,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     right: 15,
     top: 135,
-    position:'absolute'
+    position:'absolute',
+    borderRadius:20
   },
   text3:{
     fontWeight: 'bold',
@@ -86,10 +109,9 @@ const styles = StyleSheet.create({
 
   },
   groupPic:{
-    position: 'relative',
-    top:230,
-    marginHorizontal:8,
-   
+    marginTop: -20,
+    marginHorizontal: 10,
+    borderRadius: 20,
   },
   scrollViewContainer: {
     flexDirection: 'row',
@@ -97,8 +119,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   text7:{
-    left:0,
-    right:0
-  }
-  
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+
+  ongoingTasks:{
+    backgroundColor: 'white',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+
+ taskList:{
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  width: 350,
+  height: 100,
+ },
+
+ category:{
+  maxHeight: 200,
+  marginTop: 250,
+ }
 });
